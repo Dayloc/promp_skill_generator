@@ -1,0 +1,73 @@
+/* PromptSkill Generator - Global Styles */
+
+body {
+    background-color: #f1f5f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Auth pages */
+.auth-page {
+    min-height: calc(100vh - 120px);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    border: none;
+}
+
+/* Result / code display */
+.result-box {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 8px;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.65;
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.result-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Scrollbar for result box */
+.result-box::-webkit-scrollbar {
+    width: 6px;
+}
+.result-box::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+.result-box::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+/* Card border top accent */
+.border-top.border-3 {
+    border-top-width: 3px !important;
+}
+
+/* Smooth transitions on buttons */
+.btn {
+    transition: all 0.15s ease;
+}
+
+/* Navbar brand icon */
+.navbar-brand i {
+    font-size: 1rem;
+}

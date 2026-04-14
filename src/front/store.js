@@ -1,38 +1,36 @@
-export const initialStore=()=>{
-  return{
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ]
-  }
-}
+export const initialStore = () => ({
+    token: localStorage.getItem("token") || null,
+    user: JSON.parse(localStorage.getItem("user") || "null"),
+    currentResult: null,
+    history: [],
+});
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'set_hello':
-      return {
-        ...store,
-        message: action.payload
-      };
-      
-    case 'add_task':
+    switch (action.type) {
 
-      const { id,  color } = action.payload
+        case "login":
+            localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("user", JSON.stringify(action.payload.user));
+            return { ...store, token: action.payload.token, user: action.payload.user };
 
-      return {
-        ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
-      };
-    default:
-      throw Error('Unknown action.');
-  }    
+        case "logout":
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            return { ...store, token: null, user: null, currentResult: null, history: [] };
+
+        case "set_result":
+            return { ...store, currentResult: action.payload };
+
+        case "set_history":
+            return { ...store, history: action.payload };
+
+        case "add_generation":
+            return { ...store, history: [action.payload, ...store.history] };
+
+        case "delete_generation":
+            return { ...store, history: store.history.filter(g => g.id !== action.payload) };
+
+        default:
+            throw new Error("Unknown action: " + action.type);
+    }
 }
